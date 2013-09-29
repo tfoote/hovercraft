@@ -1,0 +1,78 @@
+from math import sqrt, atan2, sin, cos, pi, radians
+from koko.lib.shapes import *
+
+
+
+inches = 0.0254
+feet = inches * 12
+
+
+shapes = {}
+
+
+def make_foam_sheet(length, width, color):
+
+    hc_base = rectangle(0, length, 0, width)
+    hc_base = rotate_z(hc_base, 0)
+    hc_base = extrusion(hc_base, 0, 2*0.0254)
+    hc_base.color = color
+    return hc_base
+
+shapes['main1'] = make_foam_sheet(8 * feet, 4 * feet, 'green')
+
+hc_base2 = move(shapes['main1'],  4* feet, 2 * feet, 2 * inches)
+hc_base2.color = 'red'
+
+shapes['main2'] = hc_base2
+
+hc_base2 = move(shapes['main1'],  0, 0, inches * 4)
+hc_base2.color = 'blue'
+
+shapes['main3'] = hc_base2
+
+new_part = make_foam_sheet(8 * feet, 2 * feet, 'yellow')
+new_part = move(new_part, 0, 4 * feet, 0)
+
+shapes['strip1'] = new_part
+
+new_part = make_foam_sheet(8 * feet, 2 * feet, (255, 255, 125))
+new_part = move(new_part, 4 * feet, 0, 2 * inches)
+
+shapes['strip2'] = new_part
+
+new_part = make_foam_sheet(8 * feet, 2 * feet, (255, 255, 50))
+new_part = move(new_part, 0, 4 * feet, 4 * inches)
+
+shapes['strip3'] = new_part
+
+
+new_part = make_foam_sheet(4 * feet, 6 * feet, (255, 100, 255))
+new_part = move(new_part, 8 * feet, 0, 0)
+shapes['cap1'] = new_part
+
+new_part = make_foam_sheet(4 * feet, 6 * feet, (255, 100, 255))
+new_part = move(new_part, 0, 0, 2 * inches)
+shapes['cap2'] = new_part
+
+
+new_part = make_foam_sheet(4 * feet, 6 * feet, (255, 100, 255))
+new_part = move(new_part, 8 * feet, 0, 4 * inches)
+shapes['cap3'] = new_part
+
+new_part = circle(0, 0, 1 * feet)
+new_part = extrusion(new_part, 0, .24)
+new_part = move(new_part, 10 * feet, 3* feet, 6 * inches)
+shapes['lift_fan'] = new_part
+
+new_part = circle(0, 0, 1.5 * feet)
+new_part = extrusion(new_part, 0, .32)
+new_part = move(new_part, 2 * feet, 3* feet, -2 * feet)
+new_part = rotate_y(new_part, 90)
+shapes['thrust_fan'] = new_part
+
+
+# render all shapes
+cad.shapes =[s for s in shapes.values()]
+
+
+
