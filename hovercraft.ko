@@ -1,8 +1,8 @@
 from math import sqrt, atan2, sin, cos, pi, radians
 from koko.lib.shapes import *
 
-#from trapazoid import make_foam_trapazoid, trapazoid
-import trapazoid
+from trapazoid import make_foam_trapazoid, trapazoid
+#import trapazoid
 
 inches = 0.0254
 feet = inches * 12
@@ -73,6 +73,29 @@ new_part = move(new_part, 2 * feet, 3* feet, -2 * feet)
 new_part = rotate_y(new_part, 90)
 shapes['thrust_fan'] = new_part
 
+new_part = make_foam_trapazoid(10 * feet, 1 * feet, 2 * feet, 2 * feet, 'red')
+new_part = rotate_x(new_part, 90)
+new_part = move(new_part, 2 * feet, 2 * feet, 6 * inches)
+shapes['right_combing'] = new_part
+
+new_part = make_foam_trapazoid(10 * feet, 1 * feet, 2 * feet, 2 * feet, 'red')
+new_part = rotate_x(new_part, 90)
+new_part = move(new_part, 2 * feet, 4 * feet + 2 * inches, 6 * inches)
+shapes['left_combing'] = new_part
+
+new_part = make_foam_trapazoid(4 * feet, 2 * feet, 1 * feet, 1 * feet, 'red')
+new_part = rotate_y(new_part, -90)
+new_part = rotate_x(new_part, 90)
+new_part = move(new_part, 2 * feet - 2 * inches, 1* feet, 6 * inches)
+new_part -= shapes['thrust_fan']
+shapes['lift_fan_holder_front'] = new_part
+
+new_part = make_foam_trapazoid(4 * feet, 2 * feet, 1 * feet, 1 * feet, 'red')
+new_part = rotate_y(new_part, -90)
+new_part = rotate_x(new_part, 90)
+new_part = move(new_part, 1 * feet + 0 * inches, 1* feet, 6 * inches)
+new_part -= shapes['thrust_fan']
+shapes['lift_fan_holder_rear'] = new_part
 
 # render all shapes
 cad.shapes =[s for s in shapes.values()]
