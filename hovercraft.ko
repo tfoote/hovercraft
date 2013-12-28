@@ -1,7 +1,8 @@
 from math import sqrt, atan2, sin, cos, pi, radians
 from koko.lib.shapes import *
 
-
+#from trapazoid import make_foam_trapazoid, trapazoid
+import trapazoid
 
 inches = 0.0254
 feet = inches * 12
@@ -13,10 +14,12 @@ shapes = {}
 def make_foam_sheet(length, width, color):
 
     hc_base = rectangle(0, length, 0, width)
-    hc_base = rotate_z(hc_base, 0)
+    #hc_base = rotate_z(hc_base, 0)
     hc_base = extrusion(hc_base, 0, 2*0.0254)
     hc_base.color = color
     return hc_base
+
+
 
 shapes['main1'] = make_foam_sheet(8 * feet, 4 * feet, 'green')
 

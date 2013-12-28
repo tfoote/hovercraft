@@ -15,6 +15,7 @@ def trapazoid(length, height, left_offset, right_offset):
     assert right_offset >= 0
     net_shape = None
     if left_offset > 0:
+        # triangle seems to require clockwise
         net_shape += triangle(0, 0, left_offset, height, left_offset, 0)
     net_shape += rectangle(left_offset, length - right_offset, 0, height)
     if right_offset > 0:
@@ -35,7 +36,7 @@ def make_foam_sheet(length, width, color):
     hc_base.color = color
     return hc_base
 
-shapes = {}
+#shapes = {}
 #shapes['main1'] = make_foam_sheet(8, 4, 'green')# render all shapes
-shapes['trap'] = make_foam_trapazoid(4,2,1,1, 'green')
-cad.shapes =[s for s in shapes.values()]
+#shapes['trap'] = make_foam_trapazoid(4,2,1,1, 'green')
+#cad.shapes =[s for s in shapes.values()]
