@@ -2,6 +2,17 @@ from koko.lib.shapes import *
 
 
 def trapazoid(length, height, left_offset, right_offset):
+    """ Create a 2D Trapazoid. It will be the union of two triangles and a rectangle
+    @param length The length of the base of the trapazoid
+    @param height The height of the trapazoid
+    @param left_offset The offset from the end of the base to the end of the top of the trapazoid on the left
+    @param right_offset The offset from the end of the base to the end of the top of the trapazoid on the right
+    The trapazoid will be a triangle joined with a rectangle and another triangle.
+    The base of the trapazoid will be in the positive x direction. With the height in the y direction.
+    """
+    assert left_offset + right_offset < length
+    assert left_offset >= 0
+    assert right_offset >= 0
     net_shape = None
     if left_offset > 0:
         net_shape += triangle(0, 0, left_offset, height, left_offset, 0)
