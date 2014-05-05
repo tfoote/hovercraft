@@ -97,6 +97,16 @@ new_part = move(new_part, 1 * feet + 0 * inches, 1* feet, 6 * inches)
 new_part -= shapes['thrust_fan']
 shapes['lift_fan_holder_rear'] = new_part
 
+# Lift engine cutaway
+new_part = rectangle(0, 2 * feet, 0, 2 * feet)
+new_part = extrusion(new_part, 0, 6 * inches)
+new_part = move(new_part, 9 * feet, 2 * feet, 0 * feet)
+#shapes['cutaway'] = new_part
+
+for s, v in shapes.items():
+    shapes[s] = v - new_part
+
+
 # render all shapes
 cad.shapes =[s for s in shapes.values()]
 
